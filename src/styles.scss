@@ -2,22 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
+  @font-face {
+    font-family: "Inter", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    src: url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+  }
   h1 {
-    @apply text-5xl font-unica;
+    @apply text-5xl;
   }
   h2 {
-    @apply text-4xl font-martian;
+    @apply text-4xl;
   }
   h3 {
-    @apply text-3xl font-unica;
+    @apply text-3xl;
   }
   h4 {
-    @apply text-2xl font-unica;
+    @apply text-2xl;
   }
   h5 {
-    @apply text-xl font-martian;
+    @apply text-xl;
   }
   p {
-    @apply text-base font-martian;
+    @apply text-base;
   }
 }

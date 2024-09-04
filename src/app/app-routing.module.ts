@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./views/public/login/login.module').then((m) => m.LoginModule),
+  },
   {
     path: 'home',
     loadChildren: () =>
@@ -11,7 +16,7 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () =>
-      import('./views/public/not-found/not-found/not-found.module').then(
+      import('./views/public/not-found/not-found.module').then(
         (m) => m.NotFoundModule
       ),
   },

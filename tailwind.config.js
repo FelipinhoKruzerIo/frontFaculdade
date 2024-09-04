@@ -6,8 +6,9 @@ module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
     fontSize: {
-      sm: "0.8rem",
+      sm: "1rem",
       base: "1.25rem",
+      l: "1.75rem",
       xl: "2rem",
       "2xl": "2.5rem",
       "3xl": "3rem",
@@ -38,7 +39,11 @@ module.exports = {
       current: "currentColor",
       black: colors.black,
       white: colors.white,
-      "grey-light": "#BFC0C0",
+      "grey-light-50": "#828282",
+      "grey-light-30": "#BFC0C0",
+      "grey-light-20": "#E0E0E0",
+      "primary-80": "#001219",
+      "primary-40": "#0A9396",
       "dark-blue-60": "#2D3142",
       "dark-blue-50": "#373C51",
       "dark-blue-40": "#4C5470",
@@ -46,6 +51,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
+        inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
         unica: ['"Unica One"', ...defaultTheme.fontFamily.sans],
         martian: ['"Martian Mono"', ...defaultTheme.fontFamily.sans],
       },
