@@ -6,9 +6,15 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BodyComponent } from './components/body/body.component';
 import { ButtonComponent } from './components/button/button.component';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
-  declarations: [HeaderComponent, BodyComponent, ButtonComponent],
+  declarations: [
+    HeaderComponent,
+    BodyComponent,
+    ButtonComponent,
+    InputComponent,
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -26,6 +32,7 @@ import { ButtonComponent } from './components/button/button.component';
     ReactiveFormsModule,
     BodyComponent,
     ButtonComponent,
+    InputComponent,
   ],
   providers: [provideNgxMask()],
 })

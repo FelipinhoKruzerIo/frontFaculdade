@@ -16,28 +16,24 @@
           <p class="text-l font-unica">ELDER PROTECTION</p>
         </div>
 
-        <input
+        <app-input
           formControlName="identification"
-          [ngClass]="
-            this.identification.errors && this.identification.touched
-              ? 'border border-error-20'
-              : ''
-          "
-          class="w-full text-base font-inter border border-grey-light-20 !bg-white px-2 py-1 rounded-md"
-          type="text"
-          placeholder="Endereço de E-mail ou telefone"
-        />
-        <input
+          [name]="'identification'"
+          [placeholder]="'Endereço de E-mail ou telefone'"
+          [hasError]="!!this.identification.errors"
+          [touched]="this.identification.touched"
+        >
+        </app-input>
+
+        <app-input
           formControlName="password"
-          [ngClass]="
-            this.password.errors && this.password.touched
-              ? 'border border-error-20'
-              : ''
-          "
-          class="w-full text-base font-inter border border-grey-light-20 !bg-white px-2 text-grey-light-50 py-1 rounded-md"
-          type="password"
-          placeholder="Endereço de E-mail ou telefone"
-        />
+          [name]="'password'"
+          [placeholder]="'Senha'"
+          [hasError]="!!this.password.errors"
+          [touched]="this.password.touched"
+          [type]="'password'"
+        >
+        </app-input>
         <div class="flex justify-between w-full">
           <div class="flex gap-1">
             <input id="remember-me" type="checkbox" />
@@ -50,10 +46,19 @@
             Esqueceu a senha?
           </p>
         </div>
-        <app-button [width]="'w-full'" [label]="'Entrar'"></app-button>
+        <app-button
+          (click)="login()"
+          [width]="'w-full'"
+          [label]="'Entrar'"
+        ></app-button>
         <div class="flex gap-2 font-medium">
           <p class="text-sm">Possui cadastro?</p>
-          <p class="text-sm text-primary-40">Cadastre-se</p>
+          <p
+            (click)="router.navigateByUrl('/register-user')"
+            class="text-sm text-primary-40 cursor-pointer"
+          >
+            Cadastre-se
+          </p>
         </div>
       </div>
     </form>

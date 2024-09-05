@@ -1,1 +1,16 @@
-<p>header works!</p>
+<div
+  class="flex items-end p-2 w-full justify-between h-8 sticky top-0 border-b border-grey-light-20"
+>
+  <div class="rounded flex items-center justify-center px-2 gap-4">
+    <fa-icon class="text-primary-80 text-base" [icon]="chevronLeft"></fa-icon>
+  </div>
+  <p class="font-semibold">{{ title }}</p>
+
+  <div [ngClass]="showProfile ? '' : 'h-4 w-4'">
+    <fa-icon
+      [ngClass]="showProfile ? 'block' : 'hidden'"
+      class="rounded-full border-[3.5px] border-primary-80 text-primary-80 text-base h-4 w-4 text-center"
+      [icon]="user"
+    ></fa-icon>
+  </div>
+</div>

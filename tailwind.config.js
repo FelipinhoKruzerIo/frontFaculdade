@@ -43,6 +43,7 @@ module.exports = {
       "grey-light-30": "#BFC0C0",
       "grey-light-20": "#E0E0E0",
       "primary-80": "#001219",
+      "primary-60": "#063040",
       "primary-40": "#0A9396",
       "dark-blue-60": "#2D3142",
       "dark-blue-50": "#373C51",

@@ -9,6 +9,13 @@ const routes: Routes = [
       import('./views/public/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'register-user',
+    loadChildren: () =>
+      import('./views/public/register-user/register-user.module').then(
+        (m) => m.RegisterUserModule
+      ),
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./views/private/home/home.module').then((m) => m.HomeModule),

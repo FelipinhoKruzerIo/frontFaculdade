@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     return this.form.get('password') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public router: Router) {
+    this.router = inject(Router);
     this.form = this.formBuilder.group({
       identification: new FormControl(null, [
         // Validators.minLength(11),
@@ -33,5 +35,9 @@ export class LoginComponent {
         Validators.required,
       ]),
     });
+  }
+
+  login() {
+    console.log('this.form. :>> ', this.form.value);
   }
 }

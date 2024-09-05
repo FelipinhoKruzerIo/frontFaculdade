@@ -1,0 +1,17 @@
+<div class="w-full">
+  <label *ngIf="label" for="{{ name }}"
+    ><p>{{ label }}</p></label
+  >
+  <input
+    id="{{ name }}"
+    name="{{ name }}"
+    [ngClass]="hasError && touched ? 'border border-error-20' : ''"
+    class="w-full text-base font-inter border border-grey-light-20 !bg-white px-2 text-grey-light-50 py-1 rounded-md"
+    type="{{ type }}"
+    [value]="value"
+    (input)="updateValue($event)"
+    (blur)="onTouched()"
+    placeholder="{{ placeholder }}"
+    autocomplete="on"
+  />
+</div>

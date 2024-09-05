@@ -1,0 +1,27 @@
+<app-header [title]="'Cadastrar usuário'"></app-header>
+<div
+  class="md:border md:border-grey-light-20 md:p-8 w-full md:h-fit md:rounded-md md:mx-auto"
+>
+  <app-body>
+    <form
+      class="h-full md:h-2/3 flex flex-col gap-2 md:w-1/2 md:mx-auto"
+      [formGroup]="form"
+    >
+      <div class="grid grid-cols-2 gap-2 mt-6 mb-auto md:my-0">
+        <app-input
+          *ngFor="let field of fields"
+          formControlName="{{ field.value }}"
+          [name]="field.value"
+          [placeholder]="field.placeholder"
+          [hasError]="!!form.get(field.value)?.errors"
+          [touched]="!!form.get(field.value)?.touched"
+          [type]="field.type"
+          [label]="field.label"
+          c
+        >
+        </app-input>
+      </div>
+      <app-button [width]="'w-full'" [label]="'Salvar'"></app-button>
+    </form>
+  </app-body>
+</div>
