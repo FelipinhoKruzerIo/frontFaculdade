@@ -39,7 +39,7 @@ export class UsersService {
     private configService: AppConfigService,
     private httpService: HttpService
   ) {
-    this.url = `http://15.229.230.153::3001`;
+    this.url = `http://15.229.230.153:3001`;
     this.keyUser = this.configService.userStorageToken;
   }
 
