@@ -1,12 +1,12 @@
-<div class="w-full">
+<div class="tw-w-full">
   <label *ngIf="label" for="{{ name }}"
     ><p>{{ label }}</p></label
   >
   <input
     id="{{ name }}"
     name="{{ name }}"
-    [ngClass]="hasError && touched ? 'border border-error-20' : ''"
-    class="w-full text-base font-inter border border-grey-light-20 !bg-white px-2 text-grey-light-50 py-1 rounded-md"
+    [ngClass]="hasError && touched ? 'tw-border !tw-border-error-20' : ''"
+    class="tw-w-full tw-text-base tw-font-inter tw-border tw-border-grey-light-20 !tw-bg-white tw-px-2 tw-text-dark-blue-50 tw-py-1 tw-rounded-md"
     type="{{ type }}"
     [value]="value"
     (input)="updateValue($event)"

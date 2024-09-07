@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +16,25 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   form: FormGroup;
+  loading: boolean = false;
 
-  get identification() {
-    return this.form.get('identification') as FormControl;
+  get email() {
+    return this.form.get('email') as FormControl;
   }
 
   get password() {
     return this.form.get('password') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder, public router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    public router: Router,
+    private toastrService: ToastrService
+  ) {
     this.router = inject(Router);
     this.form = this.formBuilder.group({
-      identification: new FormControl(null, [
+      email: new FormControl(null, [
         // Validators.minLength(11),
         Validators.required,
       ]),
@@ -37,7 +45,21 @@ export class LoginComponent {
     });
   }
 
-  login() {
-    console.log('this.form. :>> ', this.form.value);
+  async login() {
+    try {
+      if (!this.form.valid) {
+        return;
+      }
+      this.loading = true;
+      await this.authService.authenticate(
+        this.email.value,
+        this.password.value
+      );
+      this.loading = false;
+      this.router.navigateByUrl('/actions');
+    } catch (error: any) {
+      this.loading = true;
+      this.toastrService.error(error?.error?.message || 'Erro');
+    }
   }
 }

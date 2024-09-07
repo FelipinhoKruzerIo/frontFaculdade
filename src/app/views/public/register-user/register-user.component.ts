@@ -6,14 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-
-type Fields = {
-  label: string;
-  value: string;
-  placeholder: string;
-  type: 'text' | 'number' | 'email';
-  options?: { label: string; value: string }[];
-}[];
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
   selector: 'app-register-user',
@@ -23,72 +18,60 @@ type Fields = {
 export class RegisterUserComponent {
   form: FormGroup;
 
-  fields: Fields = [
-    {
-      label: 'Primeiro nome',
-      value: 'firstName',
-      type: 'text',
-      placeholder: 'Luara',
-    },
-    {
-      label: 'Sobrenome',
-      value: 'lastName',
-      type: 'text',
-      placeholder: 'Seib',
-    },
-    {
-      label: 'Idade',
-      value: 'age',
-      type: 'number',
-      placeholder: '36',
-    },
-    {
-      label: 'Gênero',
-      value: 'gender',
-      type: 'text',
-      placeholder: 'Feminino',
-      options: [
-        { label: 'Masculino', value: 'male' },
-        { label: 'Feminino', value: 'female' },
-        { label: 'Outro', value: 'other' },
-      ],
-    },
-    {
-      label: 'Tipo de usuário',
-      value: 'userType',
-      type: 'text',
-      placeholder: 'Cuidador',
-      options: [
-        { label: 'Cuidador', value: 'caregiver' },
-        { label: 'Idoso', value: 'oldPerson' },
-      ],
-    },
-    {
-      label: 'E-mail',
-      value: 'email',
-      type: 'email',
-      placeholder: 'email@example',
-    },
-    {
-      label: 'Telefone',
-      value: 'phone',
-      type: 'text',
-      placeholder: '(12)34567-8910',
-    },
-  ];
+  get email() {
+    return this.form.get('email') as FormControl;
+  }
 
-  constructor(private formBuilder: FormBuilder, public router: Router) {
+  get password() {
+    return this.form.get('password') as FormControl;
+  }
+
+  get confirmPassword() {
+    return this.form.get('confirmPassword') as FormControl;
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public router: Router,
+    private usersService: UsersService,
+    private toastrService: ToastrService,
+    private authService: AuthService
+  ) {
     this.router = inject(Router);
-    this.form = this.formBuilder.group(
-      this.fields.reduce((acc, field) => {
-        return {
-          ...acc,
-          [field.value]: new FormControl(null, [
-            // Validators.minLength(11),
-            Validators.required,
-          ]),
-        };
-      }, {})
-    );
+    this.form = this.formBuilder.group({
+      email: new FormControl(null, [
+        // Validators.minLength(11),
+        Validators.required,
+      ]),
+      password: new FormControl(null, [
+        // Validators.minLength(11),
+        Validators.required,
+      ]),
+      confirmPassword: new FormControl(null, [
+        // Validators.minLength(11),
+        Validators.required,
+      ]),
+    });
+  }
+
+  async register() {
+    try {
+      if (!this.form.valid) {
+        return;
+      }
+      const res = await this.usersService.register({
+        email: this.email.value,
+        password: this.password.value,
+      });
+      await this.authService.authenticate(
+        this.email.value,
+        this.password.value
+      );
+
+      this.toastrService.success(res.message);
+      this.router.navigateByUrl('/actions');
+    } catch (error: any) {
+      this.toastrService.error(error?.error?.message || 'Erro');
+    }
   }
 }

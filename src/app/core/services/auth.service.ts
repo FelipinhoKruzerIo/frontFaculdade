@@ -1,0 +1,105 @@
+import { EventEmitter, Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { HttpService } from 'src/app/shared/services/http.service';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { LocalStorageService } from './local-storage.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppConfigService } from './app-config.service';
+import * as moment from 'moment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  accessApproved = new EventEmitter();
+  keyToken: string;
+  url: string;
+
+  constructor(
+    private router: Router,
+    private httpService: HttpService,
+    private localStorageService: LocalStorageService,
+    private usersService: UsersService,
+    private toastrService: ToastrService,
+    private configService: AppConfigService,
+    private titleService: Title
+  ) {
+    this.usersService.setUser();
+    this.keyToken = this.configService.keyStorageToken;
+    this.url = `http://15.229.230.153:3001`;
+  }
+
+  async authenticate(email: string, password: string) {
+    try {
+      const response = await this.httpService.post(`${this.url}/auth`, {
+        email,
+        password,
+      });
+      this.setToken(response.refreshToken);
+      await this.usersService.setUserOnLocalStorage(response.user);
+
+      await this.verify(response.refreshToken);
+      this.toastrService.success(
+        'Bem Vindo ' + this.usersService.getUserFromLocalStorage().email
+      );
+    } catch (error: any) {
+      this.toastrService.error(error?.error?.message || 'Erro');
+    }
+  }
+
+  async verify(token: string) {
+    try {
+      await this.httpService.get(`${this.url}/refresh`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      this.router.navigateByUrl('');
+    } catch (error: any) {
+      this.toastrService.error(error?.error?.message || 'Erro');
+    }
+  }
+
+  async resetPassword(email: string, password: string, resetCode: number) {
+    try {
+      await this.httpService.post(`${this.url}/users/${email}/reset-password`, {
+        password,
+        resetCode,
+      });
+    } catch (error: any) {
+      this.toastrService.error(error?.error?.message || 'Erro');
+    }
+  }
+
+  setToken(token: string) {
+    this.localStorageService.set(this.keyToken, token);
+  }
+
+  getToken() {
+    return this.localStorageService.get(this.keyToken);
+  }
+
+  removeToken() {
+    this.localStorageService.remove(this.keyToken);
+  }
+
+  getTokenExpiration() {
+    return moment(this.usersService.user.exp).format('LLLL');
+  }
+
+  verifyTokenExpiration() {
+    const expires = moment(this.usersService.user.exp).utc(false);
+    const now = moment().utc(false).add(8, 'seconds');
+    return !now.isSameOrBefore(expires);
+  }
+
+  logout(expired?: boolean) {
+    this.localStorageService.clear();
+    this.usersService.clear();
+    this.titleService.setTitle('Caring Guardians');
+    if (!expired) {
+      this.router.navigateByUrl('/login');
+    } else {
+      this.router.navigateByUrl('/login?expired=true');
+    }
+  }
+}

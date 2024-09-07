@@ -1,0 +1,32 @@
+<app-header [title]="'Detalhes de usuário'" [navigateTo]="'login'"></app-header>
+<div
+  class="md:tw-border md:tw-border-grey-light-20 md:tw-p-8 tw-w-full md:tw-h-fit md:tw-rounded-md md:tw-mx-auto"
+>
+  <app-body>
+    <form
+      class="tw-h-full md:tw-h-2/3 tw-flex tw-flex-col tw-gap-2 md:tw-w-1/2 md:tw-mx-auto"
+      [formGroup]="form"
+    >
+      <div
+        class="tw-grid tw-grid-cols-2 tw-gap-2 tw-mt-6 tw-mb-auto md:tw-my-0"
+      >
+        <app-input
+          *ngFor="let field of fields"
+          formControlName="{{ field.value }}"
+          [name]="field.value"
+          [placeholder]="field.placeholder"
+          [hasError]="!!form.get(field.value)?.errors"
+          [touched]="!!form.get(field.value)?.touched"
+          [type]="field.type"
+          [label]="field.label"
+        >
+        </app-input>
+      </div>
+      <app-button
+        (click)="save()"
+        [width]="'tw-w-full'"
+        [label]="'Salvar'"
+      ></app-button>
+    </form>
+  </app-body>
+</div>

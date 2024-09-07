@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() label: string = '';
-  @Input() width: 'w-fit' | 'w-full' = 'w-fit';
+  @Input() width: 'tw-w-fit' | 'tw-w-full' = 'tw-w-fit';
+  @Input() disabled: boolean = false;
 }

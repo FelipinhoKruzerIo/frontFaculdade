@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,18 +17,38 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'home',
-    loadChildren: () =>
-      import('./views/private/home/home.module').then((m) => m.HomeModule),
+    path: '',
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./views/private/home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'user-details',
+        loadChildren: () =>
+          import('./views/private/user-details/user-details.module').then(
+            (m) => m.UserDetailsModule
+          ),
+      },
+      {
+        path: 'actions',
+        loadChildren: () =>
+          import('./views/private/actions/actions.module').then(
+            (m) => m.ActionsModule
+          ),
+      },
+      {
+        path: 'not-found',
+        loadChildren: () =>
+          import('./views/public/not-found/not-found.module').then(
+            (m) => m.NotFoundModule
+          ),
+      },
+      { path: '**', redirectTo: '/not-found' },
+    ],
   },
-  {
-    path: 'not-found',
-    loadChildren: () =>
-      import('./views/public/not-found/not-found.module').then(
-        (m) => m.NotFoundModule
-      ),
-  },
-  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

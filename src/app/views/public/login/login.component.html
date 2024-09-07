@@ -1,61 +1,66 @@
 <app-body>
   <div
-    class="md:border md:border-grey-light-20 md:p-8 w-fit md:h-fit md:rounded-md md:mx-auto"
+    class="md:tw-border md:tw-border-grey-light-20 md:tw-p-8 w-fit md:tw-h-fit md:tw-rounded-md md:tw-mx-auto"
   >
-    <form class="h-full md:h-2/3 flex flex-col" [formGroup]="form">
+    <form class="tw-h-full md:tw-h-2/3 tw-flex tw-flex-col" [formGroup]="form">
       <div
-        class="flex flex-col items-center gap-2 justify-center mt-10 mb-auto md:my-0"
+        class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-justify-center tw-mt-10 tw-mb-auto tw-my-0"
       >
-        <div class="flex flex-col gap-1 items-center">
+        <div class="tw-flex tw-flex-col tw-gap-1 tw-items-center">
           <img
-            class="h-auto w-1/2 object-cover"
+            class="tw-h-auto tw-w-1/2 tw-object-cover"
             src="../../../../assets/images/logo.png"
             alt="logo da caring guardians"
           />
-          <h5 class="font-martian text-center font-medium">CARING GUARDIANS</h5>
-          <p class="text-l font-unica">ELDER PROTECTION</p>
+          <h5 class="tw-font-martian tw-text-center tw-font-medium">
+            CARING GUARDIANS
+          </h5>
+          <p class="tw-text-l tw-font-unica">ELDER PROTECTION</p>
         </div>
 
         <app-input
-          formControlName="identification"
-          [name]="'identification'"
-          [placeholder]="'Endereço de E-mail ou telefone'"
-          [hasError]="!!this.identification.errors"
-          [touched]="this.identification.touched"
+          formControlName="email"
+          [name]="'email'"
+          [placeholder]="'email@example.com'"
+          [hasError]="!!this.email.errors"
+          [touched]="this.email.touched"
         >
         </app-input>
 
         <app-input
           formControlName="password"
           [name]="'password'"
-          [placeholder]="'Senha'"
+          [placeholder]="'senhaSecreta'"
           [hasError]="!!this.password.errors"
           [touched]="this.password.touched"
           [type]="'password'"
         >
         </app-input>
-        <div class="flex justify-between w-full">
-          <div class="flex gap-1">
+        <div class="tw-flex tw-justify-between tw-w-full">
+          <div class="tw-flex tw-gap-1">
             <input id="remember-me" type="checkbox" />
             <label for="remember-me"
-              ><p class="text-sm font-medium">Lembrar de mim</p></label
+              ><p class="tw-text-sm tw-font-medium">Lembrar de mim</p></label
             >
           </div>
 
-          <p class="cursor-pointer text-primary-40 text-sm font-medium">
+          <p
+            class="tw-cursor-pointer tw-text-primary-40 tw-text-sm tw-font-medium"
+          >
             Esqueceu a senha?
           </p>
         </div>
         <app-button
           (click)="login()"
-          [width]="'w-full'"
+          [disabled]="loading"
+          [width]="'tw-w-full'"
           [label]="'Entrar'"
         ></app-button>
-        <div class="flex gap-2 font-medium">
-          <p class="text-sm">Possui cadastro?</p>
+        <div class="tw-flex gap-2 tw-font-medium">
+          <p class="tw-text-sm">Possui cadastro?</p>
           <p
             (click)="router.navigateByUrl('/register-user')"
-            class="text-sm text-primary-40 cursor-pointer"
+            class="tw-text-sm tw-text-primary-40 tw-cursor-pointer"
           >
             Cadastre-se
           </p>

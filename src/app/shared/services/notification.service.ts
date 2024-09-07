@@ -8,7 +8,7 @@ export class NotificationService {
   url: string;
 
   constructor(private httpService: HttpService) {
-    this.url = `https://8vw4thiruk.execute-api.sa-east-1.amazonaws.com`;
+    this.url = `http://15.229.230.153:3001`;
   }
 
   async teste() {

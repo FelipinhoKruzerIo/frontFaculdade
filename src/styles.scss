@@ -10,21 +10,21 @@
     src: url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
   }
   h1 {
-    @apply text-5xl;
+    @apply tw-text-5xl;
   }
   h2 {
-    @apply text-4xl;
+    @apply tw-text-4xl;
   }
   h3 {
-    @apply text-3xl;
+    @apply tw-text-3xl;
   }
   h4 {
-    @apply text-2xl;
+    @apply tw-text-2xl;
   }
   h5 {
-    @apply text-xl;
+    @apply tw-text-xl;
   }
   p {
-    @apply text-base;
+    @apply tw-text-base;
   }
 }
