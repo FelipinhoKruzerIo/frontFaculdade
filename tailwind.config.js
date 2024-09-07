@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   prefix: "tw-",
-  content: ["./src/**/*.{html,ts,css,scss,sass,less,styl}"],
+  content: ["./src/**/*.{html,ts,scss}"],
   theme: {
     fontSize: {
       sm: "1rem",
