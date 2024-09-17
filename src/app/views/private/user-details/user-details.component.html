@@ -13,17 +13,33 @@
       <div
         class="tw-grid tw-grid-cols-2 tw-gap-2 tw-mt-6 tw-mb-auto md:tw-my-0"
       >
-        <app-input
-          *ngFor="let field of fields"
-          formControlName="{{ field.value }}"
-          [name]="field.value"
-          [placeholder]="field.placeholder"
-          [hasError]="!!form.get(field.value)?.errors"
-          [touched]="!!form.get(field.value)?.touched"
-          [type]="field.type"
-          [label]="field.label"
-        >
-        </app-input>
+        <ng-container *ngFor="let field of fields">
+          <app-input
+            *ngIf="!field?.options"
+            formControlName="{{ field.value }}"
+            [name]="field.value"
+            [placeholder]="field.placeholder"
+            [errors]="form.get(field.value)?.errors || null"
+            [touched]="!!form.get(field.value)?.touched"
+            [type]="field.type"
+            [label]="field.label"
+          />
+          <div *ngIf="field?.options && field?.options?.length">
+            <label
+              ><p>{{ field.label }}</p></label
+            >
+            <ng-select
+              class="custom"
+              [items]="field.options || []"
+              appendTo="body"
+              formControlName="{{ field.value }}"
+              bindLabel="label"
+              bindValue="value"
+              [clearable]="false"
+            >
+            </ng-select>
+          </div>
+        </ng-container>
       </div>
       <app-button
         (click)="save()"

@@ -8,6 +8,7 @@ import { BodyComponent } from './components/body/body.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgxMaskPipe,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
@@ -41,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
     ButtonComponent,
     InputComponent,
     ToastrModule,
+    NgSelectModule,
   ],
   providers: [provideNgxMask()],
 })

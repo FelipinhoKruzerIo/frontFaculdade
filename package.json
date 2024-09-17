@@ -21,6 +21,8 @@
     "@fortawesome/angular-fontawesome": "^0.13.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@ng-select/ng-select": "^11.2.0",
+    "ngx-bootstrap": "^11.0.2",
     "ngx-mask": "^17.0.7",
     "ngx-toastr": "^16.2.0",
     "rxjs": "~7.8.0",

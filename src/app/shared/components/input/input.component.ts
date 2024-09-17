@@ -1,5 +1,10 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -14,17 +19,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input({ required: true }) hasError: boolean = false;
   @Input({ required: true }) touched: boolean = false;
   @Input({ required: true }) placeholder: string = '';
   @Input({ required: true }) name: string = '';
   @Input({ required: false }) type: string = 'text';
   @Input({ required: false }) label: string = '';
+  @Input({ required: false }) errors: ValidationErrors | null = null;
 
   value: string = '';
 
   onChange: any = () => {};
   onTouched: any = () => {};
+
+  teste() {
+    console.log('this.errors :>> ', this.errors);
+  }
 
   writeValue(value: string): void {
     this.value = value;

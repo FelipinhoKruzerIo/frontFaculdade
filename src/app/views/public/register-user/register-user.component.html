@@ -1,11 +1,8 @@
+<app-header [title]="'Registrar usuário'" [navigateTo]="'login'"></app-header>
 <app-body>
   <div
     class="md:tw-border md:tw-border-grey-light-20 tw-w-fit md:tw-h-fit md:tw-rounded-md md:tw-mx-auto"
   >
-    <app-header
-      [title]="'Registrar usuário'"
-      [navigateTo]="'login'"
-    ></app-header>
     <form
       class="tw-h-full md:tw-h-2/3 tw-flex tw-flex-col md:tw-px-8 md:tw-py-6"
       [formGroup]="form"
@@ -30,8 +27,8 @@
           formControlName="email"
           [name]="'email'"
           [placeholder]="'email@example.com'"
-          [hasError]="!!this.email.errors"
-          [touched]="this.email.touched"
+          [errors]="email.errors"
+          [touched]="email.touched"
         >
         </app-input>
 
@@ -40,9 +37,9 @@
           formControlName="password"
           [name]="'password'"
           [placeholder]="'senhaSecreta'"
-          [hasError]="!!this.password.errors"
-          [touched]="this.password.touched"
+          [touched]="password.touched"
           [type]="'password'"
+          [errors]="password.errors"
         >
         </app-input>
 
@@ -51,8 +48,8 @@
           formControlName="confirmPassword"
           [name]="'confirmPassword'"
           [placeholder]="'senhaSecreta'"
-          [hasError]="!!this.confirmPassword.errors"
-          [touched]="this.confirmPassword.touched"
+          [errors]="confirmPassword.errors"
+          [touched]="confirmPassword.touched"
           [type]="'password'"
         >
         </app-input>

@@ -24,20 +24,20 @@ export class ActionsComponent {
   }[] = [
     {
       icon: 'fire',
-      label: 'Fire Alert',
-      message: 'Instant notification for fire',
+      label: 'Alarme de incêndio',
+      message: 'Notificação instantânea de incêndio',
       value: 'fireMessage',
     },
     {
       icon: 'wind',
-      label: 'Gas Leak Detection',
-      message: 'Early gas leak warnings',
+      label: 'Alarme de vazamento de gás',
+      message: 'Notificação instantânea de vazamento de gás',
       value: 'gasMessage',
     },
     {
       icon: 'person-falling-burst',
-      label: 'Fall Detection',
-      message: 'Instant alerts for falls',
+      label: 'Alarme de queda',
+      message: 'Notificação instantânea de queda',
       value: 'fallMessage',
     },
   ];

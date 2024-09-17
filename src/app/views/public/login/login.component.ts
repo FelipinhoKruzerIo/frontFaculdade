@@ -34,14 +34,8 @@ export class LoginComponent {
   ) {
     this.router = inject(Router);
     this.form = this.formBuilder.group({
-      email: new FormControl(null, [
-        // Validators.minLength(11),
-        Validators.required,
-      ]),
-      password: new FormControl(null, [
-        // Validators.minLength(11),
-        Validators.required,
-      ]),
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 

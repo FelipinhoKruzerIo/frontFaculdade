@@ -1,7 +1,7 @@
 <app-header
   [showProfile]="true"
   [title]="'Ações de ajuda'"
-  [navigateTo]="'home'"
+  [hasLogout]="true"
 ></app-header>
 <div
   class="md:tw-border md:tw-border-grey-light-20 md:tw-p-8 w-full md:tw-h-fit md:tw-rounded-md md:tw-mx-auto"
@@ -14,25 +14,29 @@
       <ng-container *ngFor="let action of actions; let last = last">
         <div
           (click)="notify(action.value)"
-          class="tw-rounded tw-p-1 tw-bg-dark-blue-50 hover:tw-cursor-pointer tw-transition hover:tw-bg-dark-blue-40"
+          class="tw-rounded tw-p-2 tw-bg-dark-blue-50 hover:tw-cursor-pointer tw-transition hover:tw-bg-dark-blue-40"
         >
-          <div class="tw-flex tw-justify-between tw-items-center">
-            <div class="tw-h-16 md:tw-h-10 tw-flex tw-px-2 tw-items-center">
-              <div
-                class="tw-rounded tw-bg-black tw-flex tw-items-center tw-justify-center tw-px-2 tw-gap-4 tw-w-8 tw-h-8 tw-mr-4"
-              >
-                <fa-icon
-                  class="tw-text-grey-light-30 tw-text-xl"
-                  [icon]="['fas', action.icon]"
-                ></fa-icon>
-              </div>
-              <div>
-                <p class="tw-text-white">{{ action.label }}</p>
-                <p class="tw-text-white tw-text-sm">{{ action.message }}</p>
-              </div>
+          <div
+            class="tw-h-16 md:tw-h-10 tw-flex md:tw-px-2 tw-items-center tw-justify-between tw-gap-1"
+          >
+            <div
+              class="tw-rounded tw-bg-black tw-flex tw-items-center tw-justify-center tw-px-2 tw-gap-4 tw-w-8 tw-h-8 md:tw-mr-4"
+            >
+              <fa-icon
+                class="tw-text-grey-light-30 tw-text-xl"
+                [icon]="['fas', action.icon]"
+              ></fa-icon>
+            </div>
+            <div>
+              <p class="tw-text-white tw-text-base tw-text-start">
+                {{ action.label }}
+              </p>
+              <!-- <p class="tw-text-white tw-text-sm">
+                  {{ action.message }}
+                </p> -->
             </div>
             <fa-icon
-              class="tw-text-grey-light-30 tw-text-base tw-mr-4"
+              class="tw-text-grey-light-30 tw-text-base tw-p-1 md:tw-mr-4"
               [icon]="['fas', 'chevron-right']"
             ></fa-icon>
           </div>

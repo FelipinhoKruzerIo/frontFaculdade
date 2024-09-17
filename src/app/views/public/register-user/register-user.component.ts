@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UsersService } from 'src/app/shared/services/users.service';
+import { ValidatePassword } from 'src/app/shared/validators/validate-password';
 
 @Component({
   selector: 'app-register-user',
@@ -39,17 +40,16 @@ export class RegisterUserComponent {
   ) {
     this.router = inject(Router);
     this.form = this.formBuilder.group({
-      email: new FormControl(null, [
-        // Validators.minLength(11),
-        Validators.required,
-      ]),
+      email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, [
-        // Validators.minLength(11),
         Validators.required,
+        Validators.minLength(8),
+        ValidatePassword('confirmPassword'),
       ]),
       confirmPassword: new FormControl(null, [
-        // Validators.minLength(11),
         Validators.required,
+        Validators.minLength(8),
+        ValidatePassword('password'),
       ]),
     });
   }
