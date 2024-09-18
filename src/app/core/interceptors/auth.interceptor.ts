@@ -26,8 +26,8 @@ export class AuthInterceptor implements HttpInterceptor {
         headers: req.headers.set('Content-Type', 'application/json'),
       });
     }
-
-    req = this.addAuthenticationToken(req);
+    if (req.url !== 'http://15.229.230.153:3001/refresh')
+      req = this.addAuthenticationToken(req);
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // Here we could first retrieve the token from where we store it.
     let modifiedReq = request.clone();
 
-    const token = this.authService.getRefreshToken();
+    const token = this.authService.getAccessToken();
     if (!token) return request;
 
     modifiedReq = modifiedReq.clone({
