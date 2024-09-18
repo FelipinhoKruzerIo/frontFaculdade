@@ -52,6 +52,7 @@ export class LoginComponent {
       this.loading = false;
       this.router.navigateByUrl('/actions');
     } catch (error: any) {
+      this.authService.logout();
       this.loading = true;
       this.toastrService.error(error?.error?.message || 'Erro');
     }

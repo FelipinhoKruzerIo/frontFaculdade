@@ -46,8 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // Here we could first retrieve the token from where we store it.
     let modifiedReq = request.clone();
 
-    const token = this.authService.getToken();
-    console.log('token :>> ', token);
+    const token = this.authService.getRefreshToken();
     if (!token) return request;
 
     modifiedReq = modifiedReq.clone({

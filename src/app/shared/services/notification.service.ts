@@ -16,6 +16,6 @@ export class NotificationService {
   }
 
   async add(body: any) {
-    return this.httpService.post(`${this.url}/notification`, body);
+    return this.httpService.post(`${this.url}/notifications`, body);
   }
 }

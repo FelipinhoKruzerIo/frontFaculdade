@@ -13,7 +13,8 @@ import * as moment from 'moment';
 })
 export class AuthService {
   accessApproved = new EventEmitter();
-  keyToken: string;
+  accessToken: string;
+  refreshToken: string;
   url: string;
 
   constructor(
@@ -26,7 +27,8 @@ export class AuthService {
     private titleService: Title
   ) {
     this.usersService.setUser();
-    this.keyToken = this.configService.keyStorageToken;
+    this.accessToken = this.configService.accessToken;
+    this.refreshToken = this.configService.refreshToken;
     this.url = `http://15.229.230.153:3001`;
   }
 
@@ -36,7 +38,8 @@ export class AuthService {
         email,
         password,
       });
-      this.setToken(response.refreshToken);
+      this.setAccessToken(response.accessToken);
+      this.setRefreshToken(response.refreshToken);
       await this.usersService.setUserOnLocalStorage(response.user);
 
       await this.verify(response.refreshToken);
@@ -70,26 +73,42 @@ export class AuthService {
     }
   }
 
-  setToken(token: string) {
-    this.localStorageService.set(this.keyToken, token);
+  setAccessToken(token: string) {
+    this.localStorageService.set(this.accessToken, token);
   }
 
-  getToken() {
-    return this.localStorageService.get(this.keyToken);
+  getAccessToken() {
+    return this.localStorageService.get(this.accessToken);
   }
 
-  removeToken() {
-    this.localStorageService.remove(this.keyToken);
+  removeAccessToken() {
+    this.localStorageService.remove(this.accessToken);
+  }
+
+  setRefreshToken(token: string) {
+    this.localStorageService.set(this.refreshToken, token);
+  }
+
+  getRefreshToken() {
+    return this.localStorageService.get(this.refreshToken);
+  }
+
+  removeRefreshToken() {
+    this.localStorageService.remove(this.refreshToken);
   }
 
   getTokenExpiration() {
-    return moment(this.usersService.user.exp).format('LLLL');
+    return moment(this.usersService.user?.exp).format('LLLL');
   }
 
-  verifyTokenExpiration() {
-    const expires = moment(this.usersService.user.exp).utc(false);
-    const now = moment().utc(false).add(8, 'seconds');
-    return !now.isSameOrBefore(expires);
+  isTokenValid() {
+    const expirationTimestamp = this.usersService.user?.exp;
+    if (!expirationTimestamp) return false;
+
+    const expirationDate = moment.unix(expirationTimestamp);
+
+    const currentDate = moment();
+    return !currentDate.isAfter(expirationDate);
   }
 
   logout(expired?: boolean) {

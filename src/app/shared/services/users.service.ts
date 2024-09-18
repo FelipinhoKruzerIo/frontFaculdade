@@ -23,7 +23,7 @@ type userBody = {
   email: string;
   phone: string;
   password: string;
-  exp?: string;
+  exp?: number;
 };
 
 @Injectable({
@@ -32,7 +32,7 @@ type userBody = {
 export class UsersService {
   url: string;
   keyUser: string;
-  user!: userBody;
+  user: userBody | null = null;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -72,6 +72,7 @@ export class UsersService {
   }
 
   clear() {
+    this.user = null;
     this.localStorageService.remove(this.keyUser);
   }
 }

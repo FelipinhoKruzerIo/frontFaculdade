@@ -6,7 +6,8 @@ export const authGuard = async () => {
   const authService = inject(AuthService);
   const userService = inject(UsersService);
   let allowed: boolean = false;
-  if (userService.user && authService.verifyTokenExpiration()) {
+
+  if (userService.user && authService.isTokenValid()) {
     allowed = true;
   }
 
