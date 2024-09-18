@@ -1,16 +1,14 @@
 <app-header [title]="'Registrar usuário'" [navigateTo]="'login'"></app-header>
 <app-body>
-  <div
-    class="md:tw-border md:tw-border-grey-light-20 tw-w-fit md:tw-h-fit md:tw-rounded-md md:tw-mx-auto"
-  >
+  <div class="">
     <form
-      class="tw-h-full md:tw-h-2/3 tw-flex tw-flex-col md:tw-px-8 md:tw-py-6"
+      class="tw-w-full tw-h-full md:tw-h-2/3 tw-flex tw-flex-col md:tw-px-8 md:tw-py-6 md:tw-border md:tw-border-grey-light-20 md:tw-w-fit md:tw-rounded-md md:tw-mx-auto"
       [formGroup]="form"
     >
       <div
-        class="tw-flex tw-flex-col tw-items-center tw-gap-2 tw-justify-center tw-mb-auto md:tw-my-0"
+        class="tw-mt-6 tw-w-full tw-flex tw-flex-col tw-items-center tw-gap-2 tw-justify-center tw-mb-auto md:tw-my-0"
       >
-        <div class="tw-flex tw-flex-col tw-gap-1 tw-items-center">
+        <div class="tw-hidden md:tw-flex tw-flex-col tw-gap-1 tw-items-center">
           <img
             class="tw-h-auto tw-w-1/2 tw-object-cover"
             src="../../../../assets/images/logo.png"
